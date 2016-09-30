@@ -1,3 +1,7 @@
+<!---
+  category: AppSettings ControlsLayoutAndText Data IdentitySecurityAndEncryption MapsAndLocation Navigation NetworkingAndWebServices TilesToastAndNotifications
+-->
+
 # Lunch Scheduler app sample
 
 Lunch Scheduler is a Universal Windows Platform (UWP) app sample that simplifies organizing lunch with friends or co-workers. You choose a time and location, invite friends, and the app takes care of sending out notifications and collecting responses.
