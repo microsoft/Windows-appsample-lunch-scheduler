@@ -1,0 +1,192 @@
+﻿<!--
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+// 
+//  The MIT License (MIT)
+// 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+// 
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+// 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+//  Microsoft License for use of Images
+//
+//  Microsoft grants you a worldwide, non-exclusive, non-transferrable, revocable, 
+//  royalty-free license to use the Microsoft photographs or images contained in this
+//  Microsoft sample project, Lunch Scheduler, (“Images”) solely for your purposes
+//  of internal using or testing the sample application.You may not copy, modify,
+//  reproduce, distribute, publicly display, offer for sale,
+//  sell, market, or promote the Microsoft Images.    
+-->
+
+<Application x:Class="LunchScheduler.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="using:LunchScheduler.Converters"
+             RequestedTheme="Light">
+    <Application.Resources>
+        <ResourceDictionary>
+            <converters:StateToGlyphConverter x:Key="StateToGlyphConverter" />
+            <converters:DateStringFormatConverter x:Key="DateStringFormatConverter" />
+
+            <Style x:Key="BrandListHeaderTextStyle"
+                   TargetType="TextBlock">
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="Foreground"
+                        Value="{ThemeResource BrandPrimaryColorBrush}" />
+                <Setter Property="Typography.Capitals"
+                        Value="AllSmallCaps" />
+                <Setter Property="LineHeight"
+                        Value="20" />
+                <Setter Property="CharacterSpacing"
+                        Value="100" />
+            </Style>
+
+            <Style x:Key="BrandCaptionTextStyle"
+                   TargetType="TextBlock"
+                   BasedOn="{StaticResource CaptionTextBlockStyle}">
+                <Setter Property="Foreground"
+                        Value="{ThemeResource BrandPrimaryMediumBrush}" />
+                <Setter Property="Typography.Capitals"
+                        Value="AllSmallCaps" />
+                <Setter Property="Margin"
+                        Value="-4,4,-4,0" />
+            </Style>
+
+            <Style x:Key="BrandGridViewItemStyle"
+                   TargetType="GridViewItem">
+                <Setter Property="Margin"
+                        Value="6,0" />
+            </Style>
+
+            <Style x:Name="PersonPictureGridStyle"
+                   TargetType="GridView">
+                <Setter Property="Margin"
+                        Value="0,44,0,0" />
+                <Setter Property="IsItemClickEnabled"
+                        Value="False" />
+                <Setter Property="IsMultiSelectCheckBoxEnabled"
+                        Value="False" />
+                <Setter Property="IsSwipeEnabled"
+                        Value="False" />
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                        Value="Auto" />
+                <Setter Property="ScrollViewer.HorizontalScrollMode"
+                        Value="Auto" />
+                <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled"
+                        Value="False" />
+                <Setter Property="SelectionMode"
+                        Value="None" />
+                <Setter Property="ItemContainerStyle"
+                        Value="{StaticResource BrandGridViewItemStyle}" />
+            </Style>
+
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <Color x:Key="BrandPrimaryColor">#C83C56</Color>
+                    <Color x:Key="BrandPrimaryColor60">#99C83C56</Color>
+                    <Color x:Key="BrandPrimaryColor30">#4DC83C56</Color>
+
+                    <SolidColorBrush x:Key="BrandPrimaryColorBrush"
+                                     Color="{StaticResource BrandPrimaryColor}" />
+                    <SolidColorBrush x:Key="BrandPrimaryColorBrush60"
+                                     Color="{StaticResource BrandPrimaryColor60}" />
+                    <SolidColorBrush x:Key="BrandPrimaryColorBrush30"
+                                     Color="{StaticResource BrandPrimaryColor30}" />
+
+                    <Color x:Key="BrandAccentColor">#30D2BE</Color>
+                    <Color x:Key="BrandAccentColor60">#9930D2BE</Color>
+                    <Color x:Key="BrandAccentColor30">#4D30D2BE</Color>
+
+                    <SolidColorBrush x:Key="BrandAccentColorBrush"
+                                     Color="{StaticResource BrandAccentColor}" />
+                    <SolidColorBrush x:Key="BrandAccentColorBrush60"
+                                     Color="{StaticResource BrandAccentColor60}" />
+                    <SolidColorBrush x:Key="BrandAccentColorBrush30"
+                                     Color="{StaticResource BrandAccentColor30}" />
+
+                    <Color x:Key="BrandPrimaryLightColor">#FFFFFF</Color>
+                    <Color x:Key="BrandPrimaryLightColor60">#99FFFFFF</Color>
+                    <Color x:Key="BrandPrimaryLightColor30">#4DFFFFFF</Color>
+
+                    <SolidColorBrush x:Key="BrandPrimaryLightBrush"
+                                     Color="{StaticResource BrandPrimaryLightColor}" />
+                    <SolidColorBrush x:Key="BrandPrimaryLightBrush60"
+                                     Color="{StaticResource BrandPrimaryLightColor60}" />
+                    <SolidColorBrush x:Key="BrandPrimaryLightBrush30"
+                                     Color="{StaticResource BrandPrimaryLightColor30}" />
+
+                    <Color x:Key="BrandPrimaryMediumColor">#333333</Color>
+                    <Color x:Key="BrandPrimaryMediumColor60">#99333333</Color>
+                    <Color x:Key="BrandPrimaryMediumColor30">#4D333333</Color>
+
+                    <SolidColorBrush x:Key="BrandPrimaryMediumBrush"
+                                     Color="{StaticResource BrandPrimaryMediumColor}" />
+                    <SolidColorBrush x:Key="BrandPrimaryMediumBrush60"
+                                     Color="{StaticResource BrandPrimaryMediumColor60}" />
+                    <SolidColorBrush x:Key="BrandPrimaryMediumBrush30"
+                                     Color="{StaticResource BrandPrimaryMediumColor30}" />
+
+                    <Color x:Key="BrandAcceptColor">#57AF57</Color>
+                    <Color x:Key="BrandAcceptColor60">#9957AF57</Color>
+                    <Color x:Key="BrandAcceptColor30">#4D57AF57</Color>
+                    <Color x:Key="BrandAcceptColorAccent">#DD57AF57</Color>
+
+                    <SolidColorBrush x:Key="BrandAcceptBrush30" 
+                                     Color="{StaticResource BrandAcceptColor30}"/>
+
+                    <Color x:Key="BrandDeclineColor">#E53F00</Color>
+                    <Color x:Key="BrandDeclineColor60">#99E53F00</Color>
+                    <Color x:Key="BrandDeclineColor30">#4DE53F00</Color>
+                    <Color x:Key="BrandDeclineColorAccent">#DDE53F00</Color>
+
+                    <SolidColorBrush x:Key="BrandDeclineBrush30" 
+                                     Color="{StaticResource BrandDeclineColor30}"/>
+
+                    <AcrylicBrush x:Key="NavBackgroundAcrylicBrush"
+                                  BackgroundSource="HostBackdrop"
+                                  TintColor="{StaticResource BrandPrimaryColor}"
+                                  TintOpacity="0.8"
+                                  FallbackColor="{StaticResource BrandPrimaryColor}" />
+
+                    <LinearGradientBrush x:Key="AppPageBackgroundBrush"
+                                         StartPoint="0.5,0"
+                                         EndPoint="0.5,1">
+                        <GradientStop Color="#FFF9F9"
+                                      Offset="0.0" />
+                        <GradientStop Color="#FDEAE9"
+                                      Offset="1.0" />
+                    </LinearGradientBrush>
+
+                    <SolidColorBrush x:Key="PersonPictureEllipseBadgeForegroundThemeBrush"
+                                     Color="{StaticResource BrandPrimaryColor}" />
+                    <SolidColorBrush x:Key="PersonPictureEllipseBadgeFillThemeBrush"
+                                     Color="{StaticResource BrandPrimaryLightColor}" />
+
+                    <SolidColorBrush x:Key="RatingControlSelectedForeground"
+                                     Color="{StaticResource BrandPrimaryColor60}" />
+
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Dark">
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

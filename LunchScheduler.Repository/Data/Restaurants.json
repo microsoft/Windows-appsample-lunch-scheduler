@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Alpine Ski House",
+    "rating": 3.5,
+    "photoName": "restaurant_0.jpg",
+    "website": "http://www.alpineskihouse.com/",
+    "address": "1234 Main St",
+    "price": "$",
+    "category": "Coffee, Sandwiches, Brewery",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/0.jpg"
+  },
+  {
+    "name": "Best For You Organics Company",
+    "rating": 4,
+    "photoName": "restaurant_1.jpg",
+    "website": "http://www.bestforyouorganics.com",
+    "address": "2345 Main St",
+    "price": "$$",
+    "category": "Salad, Sandwiches, Vegetarian",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/1.jpg"
+  },
+  {
+    "name": "Fourth Coffee",
+    "rating": 4.5,
+    "photoName": "restaurant_2.jpg",
+    "website": "http://www.fourthcoffee.com/",
+    "address": "3456 Main St",
+    "price": "$",
+    "category": "Coffee, Pastry",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/2.jpg"
+  },
+  {
+    "name": "Liberty's Delightful Sinful Bakery & Cafe",
+    "rating": 3,
+    "photoName": "restaurant_3.jpg",
+    "website": "http://www.libertysdelightfulsinfulbakeryandcafe.com",
+    "address": "4567 Main St",
+    "price": "$$",
+    "category": "Bakery, Cafe, Pastry, Coffee",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/3.jpg"
+  },
+  {
+    "name": "Munson's Pickles and Preserves Farm",
+    "rating": 2.5,
+    "photoName": "restaurant_4.jpg",
+    "website": "http://www.munsonspicklesandpreservesfarm.com",
+    "address": "5678 Main St",
+    "price": "$",
+    "category": "Pickles, Preserves, Condiments",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/4.jpg"
+  },
+  {
+    "name": "Northwind Traders",
+    "rating": 5,
+    "photoName": "restaurant_5.jpg",
+    "website": "http://www.northwindtraders.com/",
+    "address": "6789 Main St",
+    "price": "$$",
+    "category": "Meats, Sandwiches, Imports",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/5.jpg"
+  },
+  {
+    "name": "School of Fine Art",
+    "rating": 3,
+    "photoName": "restaurant_6.jpg",
+    "website": "http://www.fineartschool.net",
+    "address": "1234 2nd St",
+    "price": "$",
+    "category": "Cafe, Coffee, Sandwiches",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/6.jpg"
+  },
+  {
+    "name": "Southridge Video",
+    "rating": 2.5,
+    "photoName": "restaurant_7.jpg",
+    "website": "http://www.southridgevideo.com/",
+    "address": "2345 2nd St",
+    "price": "$",
+    "category": "Candy, Popcorn",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/7.jpg"
+  },
+  {
+    "name": "The Phone Company",
+    "rating": 5,
+    "photoName": "restaurant_8.jpg",
+    "website": "http://www.thephone-company.com/",
+    "address": "3456 2nd St",
+    "price": "$$$",
+    "category": "Steak, Seafood",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/8.jpg"
+  },
+  {
+    "name": "Wide World Importers",
+    "rating": 3,
+    "photoName": "restaurant_9.jpg",
+    "website": "http://www.wideworldimporters.com/",
+    "address": "4567 2nd St",
+    "price": "$$$",
+    "category": "Meats, Cheeses, Wine",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/9.jpg"
+  },
+  {
+    "name": "Bellows College",
+    "rating": 2.5,
+    "photoName": "restaurant_10.jpg",
+    "website": "http://www.bellowscollege.com",
+    "address": "5678 2nd St",
+    "price": "$",
+    "category": "Pizza, Sandwiches, Buffet",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/10.jpg"
+  },
+  {
+    "name": "Contoso, Ltd.",
+    "rating": 5,
+    "photoName": "restaurant_11.jpg",
+    "website": "http://www.contoso.com/",
+    "address": "6789 2nd St",
+    "price": "$$",
+    "category": "Sandwiches, Cafe",
+    "photoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/restaurants/10.jpg"
+  }
+]

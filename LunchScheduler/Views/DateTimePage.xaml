@@ -1,0 +1,189 @@
+﻿<!--
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+// 
+//  The MIT License (MIT)
+// 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+// 
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+// 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+//  Microsoft License for use of Images
+//
+//  Microsoft grants you a worldwide, non-exclusive, non-transferrable, revocable, 
+//  royalty-free license to use the Microsoft photographs or images contained in this
+//  Microsoft sample project, Lunch Scheduler, (“Images”) solely for your purposes
+//  of internal using or testing the sample application.You may not copy, modify,
+//  reproduce, distribute, publicly display, offer for sale,
+//  sell, market, or promote the Microsoft Images.    
+-->
+
+<Page
+    x:Class="LunchScheduler.Views.DateTimePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LunchScheduler.Views"
+    xmlns:ctCtrls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:models="using:LunchScheduler.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" NavigationCacheMode="Enabled">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ControlTemplates.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="PickerCalendarViewStyle1" TargetType="CalendarView">
+                <Setter Property="CalendarItemBorderBrush" Value="Transparent"/>
+                <Setter Property="FocusBorderBrush" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+            </Style>
+
+            <Style TargetType="ctCtrls:DropShadowPanel">
+                <Setter Property="BlurRadius" Value="24"/>
+                <Setter Property="OffsetX" Value="9"/>
+                <Setter Property="OffsetY" Value="16"/>
+                <Setter Property="ShadowOpacity" Value="0.16"/>
+                <Setter Property="Color" Value="#000000"/>
+                <Setter Property="Margin" Value="0,84,60,0"/>
+                <Setter Property="IsTabStop" Value="False"/>
+            </Style>
+
+            <Style x:Key="ShadowGridStyle" TargetType="Grid">
+                <Setter Property="BorderBrush" Value="#EEEEEE"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="CornerRadius" Value="12"/>
+                <Setter Property="Background" Value="#FFFFFF"/>
+                <Setter Property="Height" Value="492"/>
+                <Setter Property="Width" Value="384"/>
+                <Setter Property="Margin" Value="0,0,0,40"/>
+            </Style>
+
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource AppPageBackgroundBrush}">
+        <Grid Margin="24,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Event info" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,40"/>
+            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto">
+                <VariableSizedWrapGrid Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+
+                    <ctCtrls:DropShadowPanel>
+                        <Grid Style="{StaticResource ShadowGridStyle}">
+                            <Grid.Resources>
+                                <SolidColorBrush x:Key="CalendarViewBorderBrush" Color="Transparent"/>
+                                <SolidColorBrush x:Key="CalendarViewFocusBorderBrush" Color="Transparent"/>
+                                <!--<SolidColorBrush x:Key="CalendarViewHoverBorderBrush" Color="Transparent"/>-->
+                                <!--<SolidColorBrush x:Key="CalendarViewPressedBorderBrush" Color="Transparent"/>-->
+                                <!--<SolidColorBrush x:Key="CalendarViewSelectedBorderBrush" Color="Transparent"/>-->
+                                <!--<SolidColorBrush x:Key="CalendarViewSelectedHoverBorderBrush" Color="Transparent"/>-->
+                                <!--<SolidColorBrush x:Key="CalendarViewSelectedPressedBorderBrush" Color="Transparent"/>-->
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Margin="24,0,0,0">
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE163;" 
+                                      Margin="0,6,24,0" FontSize="36"/>
+                                <TextBlock Text="Date" Style="{StaticResource HeaderTextBlockStyle}"/>
+                            </StackPanel>
+                            <CalendarDatePicker x:Name="LunchDatePicker" 
+                                                VerticalAlignment="Center" HorizontalAlignment="Center"  
+                                                Margin="12,-64,12,0"
+                                                Grid.Row="1" FontSize="48" 
+                                                CalendarViewStyle="{StaticResource PickerCalendarViewStyle1}"
+                                                BorderThickness="0"
+                                                CalendarViewDayItemChanging="LunchDateCalendar_CalendarViewDayItemChanging"
+                                                DateChanged="LunchDatePicker_DateChanged"
+                                                Loaded="LunchDatePicker_Loaded">
+                            </CalendarDatePicker>
+
+                            <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Center"
+                                    Grid.Row="1" Margin="0,0,0,12"
+                                    Visibility="{x:Bind LunchDatePicker.IsCalendarOpen, Mode=OneWay}">
+                                <TextBlock Text="Accepted Lunch: " Style="{StaticResource CaptionTextBlockStyle}"/>
+                                <Rectangle Width="32" Height="4" Fill="{ThemeResource BrandAcceptBrush30}" Margin="4,2,24,0"/>
+                                <TextBlock Text="Pending Invitation: " Style="{StaticResource CaptionTextBlockStyle}"/>
+                                <Rectangle Width="32" Height="4" Fill="{ThemeResource BrandDeclineBrush30}" Margin="4,2,2,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </ctCtrls:DropShadowPanel>
+
+                    <ctCtrls:DropShadowPanel>
+                        <Grid  Style="{StaticResource ShadowGridStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Margin="24,0,0,0">
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE823;" 
+                                      Margin="0,6,24,0" FontSize="36"/>
+                                <TextBlock Text="Time" Style="{StaticResource HeaderTextBlockStyle}"/>
+                            </StackPanel>
+                            <TextBlock Text="select a time" Style="{StaticResource HeaderTextBlockStyle}"
+                                   Grid.Row="1" Margin="0,-64,0,0" FontWeight="Normal"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#666666"
+                                   Tapped="TextBlock_Tapped"/>
+                            <TimePicker x:Name="LunchTimePicker"  Grid.Row="1" Style="{StaticResource BrandTimePickerStyle}"
+                                    Time="12:00" Visibility="Collapsed"
+                                    VerticalAlignment="Center" Margin="0,-64,0,0" 
+                                    HorizontalAlignment="Center" 
+                                    MinuteIncrement="15" FontSize="48"
+                                    TimeChanged="LunchTimePicker_TimeChanged"/>
+                        </Grid>
+                    </ctCtrls:DropShadowPanel>
+
+                    <ctCtrls:DropShadowPanel>
+                        <Grid Style="{StaticResource ShadowGridStyle}">
+                            <Grid.Resources>
+                                <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent"/>
+                                <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent"/>
+                                <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent"/>
+                                <SolidColorBrush x:Key="TextControlBorderBrushDisabled" Color="Transparent"/>
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Margin="24,0,0,0">
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70B;" 
+                                      Margin="0,6,24,0" FontSize="36"/>
+                                <TextBlock Text="Notes" Style="{StaticResource HeaderTextBlockStyle}"/>
+                            </StackPanel>
+                            <TextBox Text="{x:Bind ViewModel.LunchBeingCreated.Notes, Mode=TwoWay}"
+                                 VerticalAlignment="Stretch" 
+                                 HorizontalAlignment="Stretch" Grid.Row="1"
+                                 AcceptsReturn="True" TextWrapping="Wrap" 
+                                 BorderBrush="Transparent"
+                                 Margin="8,24,8,8"
+                                 FontSize="24"/>
+                        </Grid>
+                    </ctCtrls:DropShadowPanel>
+
+                </VariableSizedWrapGrid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

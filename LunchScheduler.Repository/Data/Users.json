@@ -1,0 +1,79 @@
+﻿[
+  {
+    "Name": "Eric Fiore",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/0.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "db3ea93d-8fdd-4169-b7de-ae150323453b"
+  },
+  {
+    "Name": "Sara Dominguez",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/1.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "54c5c5b9-4a26-428f-a7bf-763041c33760"
+  },
+  {
+    "Name": "Dana Golden",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/2.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "8f6b3812-d513-4cf5-84d1-a295371252e9"
+  },
+  {
+    "Name": "Colin Falls",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/3.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "229c1c18-6b05-4c3d-9560-4aabfe37c127"
+  },
+  {
+    "Name": "Justin McCormick",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/4.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "5f16ecf8-d64c-4695-b9e8-401b7b2c9564"
+  },
+  {
+    "Name": "Mario Haddad",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/5.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "95b7a0c6-23bc-473d-89ce-3f9590052c4e"
+  },
+  {
+    "Name": "Sheryl Sandoval",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/6.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "118441d3-503a-459f-840f-a90787d266ff"
+  },
+  {
+    "Name": "Elijah Philips",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/7.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "92624369-0eb1-4acd-aa4c-89eadde69829"
+  },
+  {
+    "Name": "Odessa Bailey",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/8.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "df8bbc33-ba53-4d2f-9f76-473b360ef499"
+  },
+  {
+    "Name": "Catalina Estes",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/9.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "f5d34550-6181-483b-bfc1-3f86b0512c4d"
+  },
+  {
+    "Name": "Rickie Armenta",
+    "PhotoUrl": "http://lunchscheduler-api-prod.azurewebsites.net/images/users/10.jpg",
+    "AuthorizationTokenExpiration": "2038-01-01T00:00:00",
+    "AuthenticationProviderKind": 3,
+    "AuthenticationProviderId": "d616e812-0439-416b-848b-7048ae2f1270"
+  }
+]

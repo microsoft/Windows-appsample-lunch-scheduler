@@ -1,0 +1,223 @@
+﻿<!--
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+// 
+//  The MIT License (MIT)
+// 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+// 
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+// 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+//  Microsoft License for use of Images
+//
+//  Microsoft grants you a worldwide, non-exclusive, non-transferrable, revocable, 
+//  royalty-free license to use the Microsoft photographs or images contained in this
+//  Microsoft sample project, Lunch Scheduler, (“Images”) solely for your purposes
+//  of internal using or testing the sample application.You may not copy, modify,
+//  reproduce, distribute, publicly display, offer for sale,
+//  sell, market, or promote the Microsoft Images.    
+-->
+
+<Page x:Class="LunchScheduler.Views.PlacesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:models="using:LunchScheduler.Models"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+      xmlns:vm="using:LunchScheduler.ViewModels"
+      xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      mc:Ignorable="d"
+      NavigationCacheMode="Enabled">
+    <Page.Resources>
+        <!--<SolidColorBrush x:Key="ListViewItemForeground" Color="#99FFFFFF"/>
+        <SolidColorBrush x:Key="ListViewItemForegroundSelected" Color="White"/>
+        <SolidColorBrush x:Key="ListViewItemForegroundPointerOver" Color="White"/>
+        <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="#F4F4F4"/>
+        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="#F2F2F2"/>
+        <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="Transparent"/>-->
+    </Page.Resources>
+
+    <Grid Margin="24,24,24,0"
+          ScrollViewer.VerticalScrollMode="Disabled">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="684" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <AutoSuggestBox Header="Search (Disabled for Demo mode.)"
+                            PlaceholderText="One Microsoft Way, Redmond, WA"
+                            QueryIcon="Find"
+                            Text="{x:Bind ViewModel.SearchAddress, Mode=OneWay}"
+                            Width="400"
+                            Margin="44,28,0,36"
+                            HorizontalAlignment="Left"
+                            IsEnabled="{x:Bind models:Constants.IsNotDemoMode}" />
+
+            <ListView x:Name="RestaurantList"
+                      ItemsSource="{x:Bind ViewModel.Restaurants}"
+                      SelectionMode="Single"
+                      Grid.Row="2"
+                      SelectedItem="{x:Bind ViewModel.SelectedRestaurant, Mode=TwoWay}"
+                      ContainerContentChanging="RestaurantList_ContainerContentChanging">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Restaurant">
+                        <Grid Margin="0,8"
+                              Width="660">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Warning: This TextBlock is used in the ContainerContentChanging handler.
+                                 It needs to be the first child of the Grid. If it moves, the code needs 
+                                 to be updated. -->
+                            <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                       Foreground="#999999"
+                                       VerticalAlignment="Center" />
+
+                            <Image Source="{x:Bind PhotoUrl}"
+                                   Width="148"
+                                   Height="100"
+                                   Stretch="UniformToFill"
+                                   Grid.Column="1" />
+
+                            <StackPanel Grid.Column="2"
+                                        Margin="16,0">
+                                <TextBlock Text="{x:Bind Name}"
+                                           Style="{StaticResource SubtitleTextBlockStyle}" />
+                                <TextBlock Text="{x:Bind Address}"
+                                           Style="{StaticResource BodyTextBlockStyle}" />
+                                <RatingControl MaxRating="5"
+                                               Value="{x:Bind Rating}"
+                                               IsReadOnly="True"
+                                               HorizontalAlignment="Left" />
+                                <TextBlock Text="{x:Bind Category}"
+                                           Style="{StaticResource BodyTextBlockStyle}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Bind Distance}"
+                                               Style="{StaticResource SubtitleTextBlockStyle}"
+                                               TextWrapping="NoWrap"
+                                               Width="36" />
+                                    <TextBlock Text=" mi."
+                                               Style="{StaticResource SubtitleTextBlockStyle}"
+                                               TextWrapping="NoWrap"
+                                               Width="36"
+                                               Margin="6,0" />
+                                </StackPanel>
+
+                                <TextBlock Text="{x:Bind Price}"
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           HorizontalAlignment="Right"
+                                           Margin="12,0" />
+                            </StackPanel>
+
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <maps:MapControl x:Name="Map"
+                         Grid.Column="1"
+                         MapServiceToken="{x:Bind models:Constants.MapServiceToken}">
+            <maps:MapItemsControl ItemsSource="{x:Bind ViewModel.MappedLocations, Mode=OneWay}">
+                <maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:MappedLocation">
+                        <Grid Tapped="Grid_Tapped"
+                              Tag="{x:Bind}">
+                            <TextBlock x:Name="UserLocationIcon"
+                                       Visibility="{x:Bind IsCurrentLocation, Mode=OneWay}"
+                                       Text="&#xE1D2;"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       FontSize="20"
+                                       Foreground="{ThemeResource BrandPrimaryColorBrush}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       maps:MapControl.Location="{x:Bind Geopoint, Mode=OneWay}"
+                                       maps:MapControl.NormalizedAnchorPoint="{x:Bind vm:MainViewModel.NormalizedAnchorPoint}" />
+
+                            <Grid x:Name="SelectedRestaurantIcon"
+                                  Visibility="{x:Bind IsSelectedRestaurant, Mode=OneWay}"
+                                  maps:MapControl.Location="{x:Bind Geopoint, Mode=OneWay}"
+                                  maps:MapControl.NormalizedAnchorPoint="{x:Bind vm:MainViewModel.NormalizedAnchorPoint}">
+                                <controls:DropShadowPanel Color="Black"
+                                                          ShadowOpacity="0.16"
+                                                          OffsetX="2"
+                                                          OffsetY="2"
+                                                          BlurRadius="6">
+                                    <Ellipse Width="20"
+                                             Height="20"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             Fill="White" />
+                                </controls:DropShadowPanel>
+                                <Ellipse Width="18"
+                                         Height="18"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Fill="{ThemeResource BrandPrimaryColorBrush}" />
+                                <TextBlock Text="{x:Bind Index, Mode=OneWay}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Padding="0,0,0,2"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="White" />
+                            </Grid>
+
+                            <Grid x:Name="UnselectedRestaurantIcon"
+                                  Visibility="{x:Bind IsUnselectedRestaurant, Mode=OneWay}"
+                                  maps:MapControl.Location="{x:Bind Geopoint, Mode=OneWay}"
+                                  maps:MapControl.NormalizedAnchorPoint="{x:Bind vm:MainViewModel.NormalizedAnchorPoint}">
+                                <Ellipse Width="16"
+                                         Height="16"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Fill="White" />
+                                <Ellipse Width="14"
+                                         Height="14"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Fill="{ThemeResource BrandPrimaryColorBrush}" />
+                                <TextBlock Text="{x:Bind Index, Mode=OneWay}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontFamily="Segoe UI"
+                                           FontSize="10"
+                                           Padding="0,0,0,1"
+                                           Foreground="White" />
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </maps:MapItemsControl.ItemTemplate>
+            </maps:MapItemsControl>
+        </maps:MapControl>
+
+    </Grid>
+</Page>

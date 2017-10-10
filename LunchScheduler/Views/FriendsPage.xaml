@@ -1,0 +1,158 @@
+﻿<!--
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+// 
+//  The MIT License (MIT)
+// 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+// 
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+// 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+//  Microsoft License for use of Images
+//
+//  Microsoft grants you a worldwide, non-exclusive, non-transferrable, revocable, 
+//  royalty-free license to use the Microsoft photographs or images contained in this
+//  Microsoft sample project, Lunch Scheduler, (“Images”) solely for your purposes
+//  of internal using or testing the sample application.You may not copy, modify,
+//  reproduce, distribute, publicly display, offer for sale,
+//  sell, market, or promote the Microsoft Images.    
+-->
+
+<Page x:Class="LunchScheduler.Views.FriendsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:models="using:LunchScheduler.Models"
+      mc:Ignorable="d"
+      NavigationCacheMode="Enabled">
+    <Page.Resources>
+        <MenuFlyout x:Key="InviteMenuFlyout"
+                    Placement="Bottom">
+            <MenuFlyoutItem Text="Invite to lunch"
+                            Click="MenuFlyoutItem_Click" />
+        </MenuFlyout>
+
+        <DataTemplate x:Key="UserDataTemplate"
+                      x:DataType="models:User">
+            <StackPanel Width="140"
+                        Height="144"
+                        Padding="20,12"
+                        Margin="0,8,0,0"
+                        ContextFlyout="{StaticResource InviteMenuFlyout}">
+                <PersonPicture DisplayName="{x:Bind Name, Mode=OneWay}"
+                               Width="100"
+                               ProfilePicture="{x:Bind PhotoUrl, Mode=OneWay}"
+                               FlyoutBase.AttachedFlyout="{StaticResource InviteMenuFlyout}"
+                               Tapped="StackPanel_Tapped" />
+                <TextBlock Text="{x:Bind Name}"
+                           Style="{StaticResource BrandCaptionTextStyle}"
+                           Grid.Row="1"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"
+                           Margin="0,4,0,0"
+                           TextWrapping="NoWrap" />
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Margin="24,24,0,0">
+        <ScrollViewer>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"
+                                   MaxHeight="290" />
+                    <RowDefinition Height="Auto"
+                                   MaxHeight="290" />
+                </Grid.RowDefinitions>
+
+                <GridView x:Name="FriendsList"
+                          Style="{StaticResource PersonPictureGridStyle}"
+                          ItemsSource="{x:Bind ViewModel.User.Friends, Mode=OneWay}"
+                          ItemTemplate="{StaticResource UserDataTemplate}"
+                          SelectionChanged="FriendsList_SelectionChanged">
+                    <GridView.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="0,0,0,8"
+                                       Style="{StaticResource BrandListHeaderTextStyle}"
+                                       Text="Lunchin' Friends" />
+                        </DataTemplate>
+                    </GridView.HeaderTemplate>
+                </GridView>
+
+                <GridView Grid.Row="1"
+                          Style="{StaticResource PersonPictureGridStyle}"
+                          ItemContainerStyle="{StaticResource BrandGridViewItemStyle}">
+                    <GridView.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="0,0,0,8"
+                                       Style="{StaticResource BrandListHeaderTextStyle}"
+                                       Text="Recent groups" />
+                        </DataTemplate>
+                    </GridView.HeaderTemplate>
+                    <StackPanel Width="140"
+                                Height="144"
+                                Padding="20,12"
+                                Margin="0,8,0,0">
+                        <PersonPicture DisplayName="Gaming friends"
+                                       BadgeGlyph="&#xE7FC;"
+                                       Width="100"
+                                       ProfilePicture="{x:Bind ViewModel.User.PhotoUrl, Mode=OneWay}" />
+                        <TextBlock Text="Gaming friends"
+                                   Style="{StaticResource BrandCaptionTextStyle}"
+                                   Grid.Row="1"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom"
+                                   Margin="0,4,0,0"
+                                   TextWrapping="NoWrap" />
+                    </StackPanel>
+                    <StackPanel Width="140"
+                                Height="144"
+                                Padding="20,12"
+                                Margin="0,8,0,0">
+                        <PersonPicture DisplayName="Carpool"
+                                       BadgeGlyph="&#xE811;"
+                                       Width="100"
+                                       ProfilePicture="{x:Bind ViewModel.User.PhotoUrl, Mode=OneWay}" />
+                        <TextBlock Text="Carpool"
+                                   Style="{StaticResource BrandCaptionTextStyle}"
+                                   Grid.Row="1"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom"
+                                   Margin="0,4,0,0"
+                                   TextWrapping="NoWrap" />
+                    </StackPanel>
+                    <StackPanel Width="140"
+                                Height="144"
+                                Padding="20,12"
+                                Margin="0,8,0,0">
+                        <PersonPicture DisplayName="Garden club"
+                                       BadgeGlyph="&#xEC0A;"
+                                       Width="100"
+                                       ProfilePicture="{x:Bind ViewModel.User.PhotoUrl, Mode=OneWay}" />
+                        <TextBlock Text="Garden club"
+                                   Style="{StaticResource BrandCaptionTextStyle}"
+                                   Grid.Row="1"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom"
+                                   Margin="0,4,0,0"
+                                   TextWrapping="NoWrap" />
+                    </StackPanel>
+                </GridView>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

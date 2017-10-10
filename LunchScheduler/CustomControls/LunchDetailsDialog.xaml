@@ -1,0 +1,176 @@
+﻿<!--
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+// 
+//  The MIT License (MIT)
+// 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+// 
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+// 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+//  Microsoft License for use of Images
+//
+//  Microsoft grants you a worldwide, non-exclusive, non-transferrable, revocable, 
+//  royalty-free license to use the Microsoft photographs or images contained in this
+//  Microsoft sample project, Lunch Scheduler, (“Images”) solely for your purposes
+//  of internal using or testing the sample application.You may not copy, modify,
+//  reproduce, distribute, publicly display, offer for sale,
+//  sell, market, or promote the Microsoft Images.    
+-->
+
+<ContentDialog x:Class="LunchScheduler.CustomControls.LunchDetailsDialog"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:models="using:LunchScheduler.Models"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               mc:Ignorable="d"
+               PrimaryButtonText="OK"
+               CloseButtonText="Cancel">
+    <ContentDialog.Resources>
+        <Style x:Key="DividerLineStyle"
+               TargetType="Line">
+            <Setter Property="X1"
+                    Value="0" />
+            <Setter Property="X2"
+                    Value="520" />
+            <Setter Property="Y1"
+                    Value="0" />
+            <Setter Property="Y2"
+                    Value="0" />
+            <Setter Property="Stroke"
+                    Value="#E2E2E2" />
+            <Setter Property="StrokeThickness"
+                    Value="1" />
+            <Setter Property="Grid.Column"
+                    Value="1" />
+            <Setter Property="VerticalAlignment"
+                    Value="Bottom" />
+        </Style>
+    </ContentDialog.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="48" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Lunch Details"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource TitleTextBlockStyle}"
+                   Foreground="#333333"
+                   Margin="0,0,0,24" />
+
+        <FontIcon FontFamily="Segoe MDL2 Assets"
+                  Glyph="&#xE716;"
+                  Grid.Row="1"
+                  VerticalAlignment="Center" />
+        <FontIcon FontFamily="Segoe MDL2 Assets"
+                  Glyph="&#xE2AD;"
+                  Grid.Row="2"
+                  VerticalAlignment="Center" />
+        <FontIcon FontFamily="Segoe MDL2 Assets"
+                  Glyph="&#xE707;"
+                  Grid.Row="3"
+                  VerticalAlignment="Center" />
+
+        <Line Grid.Row="1"
+              Style="{StaticResource DividerLineStyle}" />
+        <Line Grid.Row="2"
+              Style="{StaticResource DividerLineStyle}" />
+
+        <StackPanel Visibility="Visible"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="0,20"
+                    Orientation="Horizontal">
+
+            <PersonPicture x:Name="HostIndicator"
+                           Width="48"
+                           Height="48"
+                           VerticalAlignment="Center"
+                           Margin="20,0,0,0"
+                           IsTabStop="False"
+                           DisplayName="{Binding Host.Name}"
+                           ProfilePicture="{Binding Host.PhotoUrl}" />
+
+            <TextBlock x:Name="ColonIndicator"
+                       Text=":"
+                       Style="{StaticResource SubtitleTextBlockStyle}"
+                       VerticalAlignment="Center"
+                       Grid.Column="1"
+                       Margin="20,0" />
+
+            <GridView x:Name="FriendsIndicator"
+                      Grid.Column="2"
+                      SelectionMode="None"
+                      IsSwipeEnabled="False"
+                      IsTabStop="False"
+                      ItemsSource="{Binding Invitations}"
+                      MaxWidth="348"
+                      MinHeight="64"
+                      Margin="0,18,0,0"
+                      Loaded="FriendsIndicator_Loaded">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Invitation">
+                        <PersonPicture ProfilePicture="{x:Bind User.PhotoUrl, Mode=OneWay}"
+                                       DisplayName="{Binding User.Name}"
+                                       Width="40"
+                                       Height="40"
+                                       ToolTipService.ToolTip="{Binding User.Name}"
+                                       BadgeGlyph="{Binding Response, Mode=OneWay, Converter={StaticResource StateToGlyphConverter}}" />
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </StackPanel>
+
+        <Grid Grid.Column="1"
+              Grid.Row="2"
+              Margin="0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="260" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="20,0,0,0">
+                <TextBlock Text="{Binding Date, Converter={StaticResource DateStringFormatConverter}, ConverterParameter='d'}"
+                           Style="{StaticResource SubtitleTextBlockStyle}"
+                           Margin="0,0,0,20" />
+                <TextBlock Text="{Binding Date.TimeOfDay, Converter={StaticResource DateStringFormatConverter}, ConverterParameter='t'}"
+                           Style="{StaticResource SubtitleTextBlockStyle}" />
+            </StackPanel>
+
+            <TextBlock Text="{Binding Notes}"
+                       Style="{StaticResource SubtitleTextBlockStyle}"
+                       Grid.Column="1" />
+        </Grid>
+
+        <TextBlock Text="{Binding Location.Name}"
+                   Style="{StaticResource SubtitleTextBlockStyle}"
+                   Grid.Column="1"
+                   Grid.Row="3"
+                   Margin="20,20,0,20"
+                   VerticalAlignment="Center" />
+    </Grid>
+</ContentDialog>

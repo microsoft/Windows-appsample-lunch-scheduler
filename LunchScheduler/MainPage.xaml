@@ -1,0 +1,210 @@
+﻿<!--
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+// 
+//  The MIT License (MIT)
+// 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+// 
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+// 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+//  Microsoft License for use of Images
+//
+//  Microsoft grants you a worldwide, non-exclusive, non-transferrable, revocable, 
+//  royalty-free license to use the Microsoft photographs or images contained in this
+//  Microsoft sample project, Lunch Scheduler, (“Images”) solely for your purposes
+//  of internal using or testing the sample application.You may not copy, modify,
+//  reproduce, distribute, publicly display, offer for sale,
+//  sell, market, or promote the Microsoft Images.    
+-->
+
+<Page x:Class="LunchScheduler.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:models="using:LunchScheduler.Models"
+      mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="ListViewItemNormal"
+               TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Padding"
+                    Value="0,0,0,0" />
+            <Setter Property="Width"
+                    Value="144" />
+        </Style>
+
+        <Style x:Key="ListViewItemNarrow"
+               TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Padding"
+                    Value="0,0,0,0" />
+            <Setter Property="Width"
+                    Value="84" />
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="RootGrid"
+          Background="{StaticResource AppPageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="AppTitleBar"
+              Background="{StaticResource NavBackgroundAcrylicBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" />
+                <ColumnDefinition />
+                <ColumnDefinition x:Name="RightPaddingColumn" />
+            </Grid.ColumnDefinitions>
+            <!--<Image x:Name="AppIcon" Source="Assets/Square44x44Logo.png"
+                   HorizontalAlignment="Left"
+                   Width="20" Height="20" Margin="12,0"/>-->
+            <FontIcon FontFamily="Segoe MDL2 Assets"
+                      Glyph="&#xED56;"
+                      Foreground="{ThemeResource BrandPrimaryLightBrush}"
+                      Grid.Column="1"
+                      HorizontalAlignment="Left"
+                      Width="20"
+                      Height="20"
+                      Margin="8,0" />
+            <TextBlock Text="Lunch Scheduler"
+                       Grid.Column="1"
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Margin="36,8,0,0"
+                       Foreground="{ThemeResource BrandPrimaryLightBrush}" />
+        </Grid>
+
+        <Grid x:Name="NavControlRoot"
+              Height="48"
+              Background="{StaticResource NavBackgroundAcrylicBrush}"
+              Grid.Row="1">
+            <Grid x:Name="NavIndicatorGrid"
+                  VerticalAlignment="Bottom"
+                  HorizontalAlignment="Center"
+                  Height="1"
+                  Width="576">
+
+                <Line x:Name="NavIndicator"
+                      Stroke="{ThemeResource BrandPrimaryLightBrush}"
+                      X1="0"
+                      Y1="0"
+                      X2="144"
+                      Y2="0"
+                      StrokeThickness="2">
+                    <Line.RenderTransform>
+                        <TranslateTransform x:Name="NavIndicatorOffset" />
+                    </Line.RenderTransform>
+                </Line>
+
+            </Grid>
+
+            <ListView x:Name="NavList"
+                      HorizontalAlignment="Center"
+                      Height="48"
+                      SelectedIndex="-1"
+                      ItemClick="NavList_ItemClick"
+                      IsItemClickEnabled="True"
+                      ItemsSource="{x:Bind NavigationItems}"
+                      DisplayMemberPath="Label"
+                      ItemContainerStyle="{StaticResource ListViewItemNormal}"
+                      Loaded="NavList_Loaded">
+                <ListView.Resources>
+                    <SolidColorBrush x:Key="ListViewItemForeground"
+                                     Color="{ThemeResource BrandPrimaryLightColor60}" />
+                    <SolidColorBrush x:Key="ListViewItemForegroundSelected"
+                                     Color="{ThemeResource BrandPrimaryLightColor}" />
+                    <SolidColorBrush x:Key="ListViewItemForegroundPointerOver"
+                                     Color="{ThemeResource BrandPrimaryLightColor}" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected"
+                                     Color="Transparent" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver"
+                                     Color="Transparent" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed"
+                                     Color="Transparent" />
+                </ListView.Resources>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+
+            <HyperlinkButton Content="DEMO MODE" 
+                             Visibility="{x:Bind models:Constants.IsDemoMode}"
+                             Foreground="{ThemeResource BrandPrimaryLightBrush}"
+                             Margin="0,0,54,0"
+                             HorizontalAlignment="Right"
+                             Click="HyperlinkButton_Click">
+                <FlyoutBase.AttachedFlyout>
+                    <Flyout>
+                        <TextBlock TextWrapping="WrapWholeWords" MaxWidth="300"
+                                   Text="Lunch Scheduler is running in demo mode. For more info about demo mode, and how to run in other modes, see the project 'readme' file.">
+                        </TextBlock>
+                    </Flyout>
+                </FlyoutBase.AttachedFlyout>
+            </HyperlinkButton>
+
+            <PersonPicture x:Name="UserPicture"
+                           Width="24"
+                           Height="24"
+                           ProfilePicture="{x:Bind ViewModel.User.PhotoUrl, Mode=OneWay}"
+                           Margin="0,0,24,0"
+                           HorizontalAlignment="Right"
+                           Tapped="UserPicture_Tapped">
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Sign out"
+                                        Click="MenuFlyoutItem_Click" />
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+            </PersonPicture>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Frame x:Name="ContentFrame" />
+        </Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="NavList.ItemContainerStyle"
+                                Value="{StaticResource ListViewItemNarrow}" />
+                        <Setter Target="NavIndicator.X2"
+                                Value="88" />
+                        <Setter Target="NavIndicatorGrid.Width"
+                                Value="352" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>

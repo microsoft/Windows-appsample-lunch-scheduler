@@ -1,0 +1,329 @@
+﻿<!--
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+// 
+//  The MIT License (MIT)
+// 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+// 
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+// 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+//  Microsoft License for use of Images
+//
+//  Microsoft grants you a worldwide, non-exclusive, non-transferrable, revocable, 
+//  royalty-free license to use the Microsoft photographs or images contained in this
+//  Microsoft sample project, Lunch Scheduler, (“Images”) solely for your purposes
+//  of internal using or testing the sample application.You may not copy, modify,
+//  reproduce, distribute, publicly display, offer for sale,
+//  sell, market, or promote the Microsoft Images.    
+-->
+
+<Page x:Class="LunchScheduler.Views.CreateLunchPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ctCtrls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      xmlns:models="using:LunchScheduler.Models"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ControlTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="IndicatorEllipseStyle"
+                   TargetType="Ellipse">
+                <Setter Property="Width"
+                        Value="36" />
+                <Setter Property="Height"
+                        Value="36" />
+                <Setter Property="Fill"
+                        Value="{ThemeResource BrandPrimaryLightBrush}" />
+                <Setter Property="Stroke"
+                        Value="#00000000" />
+            </Style>
+
+            <Style x:Key="IndicatorShadowStyle"
+                   TargetType="ctCtrls:DropShadowPanel">
+                <Setter Property="BlurRadius"
+                        Value="6" />
+                <Setter Property="OffsetX"
+                        Value="2" />
+                <Setter Property="OffsetY"
+                        Value="3" />
+                <Setter Property="ShadowOpacity"
+                        Value="0.5" />
+                <Setter Property="Visibility"
+                        Value="Collapsed" />
+            </Style>
+
+            <Style x:Key="NextButtonStyle"
+                   TargetType="Button">
+                <Setter Property="Width"
+                        Value="96" />
+                <Setter Property="Height"
+                        Value="140" />
+                <Setter Property="Foreground"
+                        Value="{ThemeResource BrandPrimaryLightBrush}" />
+                <Setter Property="Background"
+                        Value="{ThemeResource BrandAccentColorBrush}" />
+                <Setter Property="BorderBrush"
+                        Value="#33FFFFFF" />
+                <Setter Property="HorizontalAlignment"
+                        Value="Right" />
+            </Style>
+
+            <AcrylicBrush x:Key="HeaderBackgroundAcrylicBrush"
+                          BackgroundSource="HostBackdrop"
+                          TintColor="{ThemeResource BrandPrimaryLightColor}"
+                          TintOpacity="0.8"
+                          FallbackColor="{ThemeResource BrandPrimaryLightColor}" />
+
+            <AcrylicBrush x:Key="ConfirmationBackgroundAcrylicBrush"
+                          BackgroundSource="Backdrop"
+                          TintColor="{ThemeResource BrandPrimaryLightColor}"
+                          TintOpacity="0.1"
+                          FallbackColor="{ThemeResource BrandPrimaryLightColor60}" />
+
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource AppPageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Background="{StaticResource HeaderBackgroundAcrylicBrush}"
+              Margin="-24,0">
+
+            <ctCtrls:DropShadowPanel x:Name="SelectionIndicator"
+                                     Visibility="Visible"
+                                     Style="{StaticResource IndicatorShadowStyle}"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Top"
+                                     Margin="-505,16,0,0">
+                <Ellipse Visibility="Visible"
+                         Style="{StaticResource IndicatorEllipseStyle}" />
+            </ctCtrls:DropShadowPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Margin="0,24,0,0">
+                <FontIcon FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xE716;"
+                          HorizontalAlignment="Left" />
+                <Line x:Name="LeftProgressLine"
+                      X1="0"
+                      Y1="0"
+                      X2="180"
+                      Y2="0"
+                      Stroke="Gray"
+                      Margin="16,0,36,0"
+                      VerticalAlignment="Center" />
+                <FontIcon FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xE2AD;" />
+                <Line x:Name="RightProgressLine"
+                      X1="0"
+                      Y1="0"
+                      X2="180"
+                      Y2="0"
+                      Stroke="Gray"
+                      Margin="36,0,16,0"
+                      VerticalAlignment="Center" />
+                <FontIcon FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xE707;"
+                          HorizontalAlignment="Right" />
+
+            </StackPanel>
+        </Grid>
+
+        <TextBlock Text="Create a Lunch"
+                   Style="{StaticResource TitleTextBlockStyle}"
+                   Margin="24,84,0,0" />
+
+        <!-- Creation progress indicators -->
+        <StackPanel Visibility="Visible"
+                    Orientation="Horizontal"
+                    Margin="204,72,204,0"
+                    Height="58"
+                    VerticalAlignment="Top"
+                    ScrollViewer.HorizontalScrollMode="Disabled">
+
+            <PersonPicture x:Name="HostIndicator"
+                           Width="48"
+                           Height="48"
+                           VerticalAlignment="Center"
+                           Margin="20,0,0,0"
+                           IsTabStop="False"
+                           DisplayName="{x:Bind ViewModel.LunchBeingCreated.Host.Name}"
+                           ProfilePicture="{x:Bind ViewModel.LunchBeingCreated.Host.PhotoUrl, Mode=OneWay}" />
+
+            <TextBlock x:Name="ColonIndicator"
+                       Text=":"
+                       Style="{StaticResource SubtitleTextBlockStyle}"
+                       VerticalAlignment="Center"
+                       Grid.Column="1"
+                       Margin="20,0" />
+
+            <GridView x:Name="FriendsIndicator"
+                      Grid.Column="2"
+                      SelectionMode="None"
+                      IsSwipeEnabled="False"
+                      IsTabStop="False"
+                      ItemsSource="{x:Bind ViewModel.LunchBeingCreated.Invitations}"
+                      ScrollViewer.HorizontalScrollMode="Disabled"
+                      Height="64"
+                      Margin="0,8,0,0">
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid MaximumRowsOrColumns="1" />
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Invitation">
+                        <PersonPicture ProfilePicture="{x:Bind User.PhotoUrl, Mode=OneWay}"
+                                       DisplayName="{x:Bind User.Name, Mode=OneWay}"
+                                       Width="40"
+                                       Height="40" />
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+
+            <TextBlock x:Name="DateIndicator"
+                       Text="{x:Bind ViewModel.LunchBeingCreated.Date.ToShortDateString(), Mode=OneWay}"
+                       Style="{StaticResource SubtitleTextBlockStyle}"
+                       Margin="32,0,0,0"
+                       VerticalAlignment="Center"
+                       Visibility="Visible" />
+
+            <TextBlock x:Name="TimeIndicator"
+                       Text="{x:Bind ViewModel.LunchBeingCreated.Date.ToShortTimeString(), Mode=OneWay}"
+                       Style="{StaticResource SubtitleTextBlockStyle}"
+                       VerticalAlignment="Center"
+                       Margin="32,0,0,0"
+                       Visibility="Visible" />
+
+            <TextBlock x:Name="LocationIndicator"
+                       Text="{x:Bind ViewModel.LunchBeingCreated.Location.Name, Mode=OneWay}"
+                       Style="{StaticResource SubtitleTextBlockStyle}"
+                       VerticalAlignment="Center"
+                       Margin="32,0,0,0" />
+
+        </StackPanel>
+
+        <Button x:Name="NextButton"
+                Style="{StaticResource NextButtonStyle}"
+                Click="NextButton_Click">
+            <StackPanel>
+                <FontIcon FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xF0AF;" />
+                <TextBlock Text="Next"
+                           FontSize="12" />
+            </StackPanel>
+            <Button.Resources>
+                <!--PointerOver-->
+                <SolidColorBrush x:Key="ButtonForegroundPointerOver"
+                                 Color="{ThemeResource BrandPrimaryLightColor60}" />
+                <SolidColorBrush x:Key="ButtonBackgroundPointerOver"
+                                 Color="{ThemeResource BrandAccentColor}" />
+                <SolidColorBrush x:Key="ButtonBorderBrushPointerOver"
+                                 Color="Transparent" />
+                <!--Pressed-->
+                <SolidColorBrush x:Key="ButtonForegroundPressed"
+                                 Color="{ThemeResource BrandPrimaryMediumColor}" />
+                <SolidColorBrush x:Key="ButtonBackgroundPressed"
+                                 Color="{ThemeResource BrandAccentColor30}" />
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="SubmitButton"
+                Style="{StaticResource NextButtonStyle}"
+                Click="SubmitButton_Click"
+                IsEnabled="{x:Bind ViewModel.IsLunchBeingCreatedComplete, Mode=OneWay}">
+            <StackPanel>
+                <FontIcon FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xE73E;" />
+                <TextBlock Text="Create lunch"
+                           FontSize="12" />
+            </StackPanel>
+            <Button.Resources>
+                <!--PointerOver-->
+                <SolidColorBrush x:Key="ButtonForegroundPointerOver"
+                                 Color="{ThemeResource BrandPrimaryLightColor60}" />
+                <SolidColorBrush x:Key="ButtonBackgroundPointerOver"
+                                 Color="{ThemeResource BrandAccentColor}" />
+                <SolidColorBrush x:Key="ButtonBorderBrushPointerOver"
+                                 Color="Transparent" />
+                <!--Pressed-->
+                <SolidColorBrush x:Key="ButtonForegroundPressed"
+                                 Color="{ThemeResource BrandPrimaryMediumColor}" />
+                <SolidColorBrush x:Key="ButtonBackgroundPressed"
+                                 Color="{ThemeResource BrandAccentColor30}" />
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="CancelButton"
+                Click="CancelButton_Click"
+                Height="35"
+                Width="90"
+                Margin="6,-40,0,0"
+                VerticalAlignment="Top"
+                ToolTipService.ToolTip="Cancel">
+            <StackPanel Orientation="Horizontal">
+                <FontIcon FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xF13D;" />
+                <TextBlock Text="Cancel"
+                           Style="{StaticResource BodyTextBlockStyle}" />
+            </StackPanel>
+            <Button.Resources>
+                <!-- Normal -->
+                <SolidColorBrush x:Key="ButtonBackground"
+                                 Color="Transparent" />
+                <SolidColorBrush x:Key="ButtonForeground"
+                                 Color="{ThemeResource BrandPrimaryLightColor}" />
+                <SolidColorBrush x:Key="ButtonBorderBrush"
+                                 Color="Transparent" />
+                <!-- PointerOver -->
+                <SolidColorBrush x:Key="ButtonForegroundPointerOver"
+                                 Color="{ThemeResource BrandPrimaryLightColor}" />
+                <SolidColorBrush x:Key="ButtonBackgroundPointerOver"
+                                 Color="{ThemeResource BrandPrimaryLightColor60}" />
+                <SolidColorBrush x:Key="ButtonBorderBrushPointerOver"
+                                 Color="Transparent" />
+                <!-- Pressed -->
+                <SolidColorBrush x:Key="ButtonForegroundPressed"
+                                 Color="#444444" />
+                <SolidColorBrush x:Key="ButtonBackgroundPressed"
+                                 Color="{ThemeResource BrandPrimaryLightColor60}" />
+            </Button.Resources>
+        </Button>
+
+        <Frame x:Name="CreateLunchFrame"
+               Grid.Row="1"
+               Navigated="CreateLunchFrame_Navigated"
+               NavigationFailed="CreateLunchFrame_NavigationFailed" />
+
+        <Rectangle x:Name="ConfirmationBackground"
+                   Fill="{StaticResource ConfirmationBackgroundAcrylicBrush}"
+                   Grid.RowSpan="2"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"
+                   Visibility="Collapsed" />
+    </Grid>
+</Page>

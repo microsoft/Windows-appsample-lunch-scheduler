@@ -1,0 +1,155 @@
+﻿<!--
+//  Copyright (c) Microsoft Corporation.  All rights reserved.
+// 
+//  The MIT License (MIT)
+// 
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+// 
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+// 
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+//  Microsoft License for use of Images
+//
+//  Microsoft grants you a worldwide, non-exclusive, non-transferrable, revocable, 
+//  royalty-free license to use the Microsoft photographs or images contained in this
+//  Microsoft sample project, Lunch Scheduler, (“Images”) solely for your purposes
+//  of internal using or testing the sample application.You may not copy, modify,
+//  reproduce, distribute, publicly display, offer for sale,
+//  sell, market, or promote the Microsoft Images.    
+-->
+
+<UserControl x:Class="LunchScheduler.CustomControls.MyLunches"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="using:LunchScheduler.Models"
+             xmlns:ctCtrls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+             xmlns:root="using:LunchScheduler"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ControlTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="MyLunchesPanelStyle"
+                   TargetType="Grid">
+                <Setter Property="BorderBrush"
+                        Value="{ThemeResource BrandPrimaryColorBrush}" />
+                <Setter Property="BorderThickness"
+                        Value="1" />
+                <Setter Property="CornerRadius"
+                        Value="12" />
+                <Setter Property="Background"
+                        Value="{ThemeResource BrandPrimaryLightBrush60}" />
+                <Setter Property="Height"
+                        Value="160" />
+            </Style>
+
+            <SolidColorBrush x:Key="AppBarItemBorderThemeBrush"
+                             Color="{ThemeResource BrandPrimaryColor}" />
+            <SolidColorBrush x:Key="AppBarItemForegroundThemeBrush"
+                             Color="{ThemeResource BrandPrimaryColor}" />
+            <Style x:Key="CreateRoundButtonStyle"
+                   TargetType="AppBarButton"
+                   BasedOn="{StaticResource RoundButtonStyle}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <ctCtrls:DropShadowPanel BlurRadius="6"
+                                 ShadowOpacity="0.16"
+                                 OffsetX="0"
+                                 OffsetY="4"
+                                 Color="#000000"
+                                 HorizontalContentAlignment="Stretch"
+                                 Margin="6,159,6,0">
+            <Border BorderBrush="Blue"
+                    BorderThickness="0,0,0,0"
+                    Height="1" />
+        </ctCtrls:DropShadowPanel>
+
+        <Grid x:Name="rootPanel"
+              Style="{StaticResource MyLunchesPanelStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto"
+                                  MaxWidth="200" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <!--<FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE121;"  Margin="16,0,32,0" Foreground="{ThemeResource BrandPrimaryColorBrush}"/>-->
+            <FontIcon FontFamily="Segoe MDL2 Assets"
+                      Glyph="&#xE783;"
+                      Margin="16,0,32,0"
+                      Foreground="{ThemeResource BrandPrimaryColorBrush}" />
+
+            <TextBlock x:Name="NextLunchText"
+                       Text="{x:Bind ViewModel.NextLunchText, Mode=OneWay}"
+                       Foreground="{ThemeResource BrandPrimaryColorBrush}"
+                       Grid.Column="1"
+                       TextWrapping="WrapWholeWords"
+                       VerticalAlignment="Center"
+                       FontSize="20"
+                       Margin="0" />
+
+            <GridView x:Name="LunchesList"
+                      ItemsSource="{x:Bind ViewModel.User.Lunches, Mode=OneWay}"
+                      SelectionMode="None"
+                      IsItemClickEnabled="True"
+                      ItemClick="LunchesList_ItemClick"
+                      Loaded="{x:Bind root:App.ViewModel.UpdateNextLunchText}"
+                      Grid.Column="2">
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid MaximumRowsOrColumns="1"
+                                       VerticalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Lunch">
+                        <StackPanel Width="140"
+                                    Height="144"
+                                    Padding="20,12"
+                                    Margin="0,8,0,0">
+                            <PersonPicture DisplayName="{x:Bind Host.Name}"
+                                           ProfilePicture="{x:Bind Host.PhotoUrl, Mode=OneWay}"
+                                           Width="100" />
+                            <TextBlock Text="{x:Bind Date, Converter={StaticResource DateStringFormatConverter}, ConverterParameter='g'}"
+                                       Style="{StaticResource BrandCaptionTextStyle}"
+                                       Grid.Row="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Bottom" />
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+
+            <AppBarButton Style="{StaticResource CreateRoundButtonStyle}"
+                          Click="CreateLunch_Click"
+                          Grid.Column="3"
+                          VerticalAlignment="Center"
+                          Label="Create Lunch"
+                          Icon="Add"
+                          Width="100"
+                          Foreground="{ThemeResource BrandPrimaryColorBrush}"
+                          Margin="24,0,0,0" />
+        </Grid>
+    </Grid>
+</UserControl>
