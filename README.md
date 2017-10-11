@@ -25,10 +25,10 @@ These images are copyrighted by Getty images, and usage is limited to the person
 in the license file.
 
 ## Prerequisites
-This sample requires Visual Studio 2017 Preview, as well as the latest Windows Insider OS and SDK releases. 
+This sample requires Visual Studio 2017 (version 15.4), as well as the latest Windows Insider OS and SDK releases. 
 Information about becoming a Windows Insider is available at [https://insider.windows.com](https://insider.windows.com). 
 Once registered, you can use the following links to retrieve the appropriate installers.
-- Get a free copy of [Visual Studio 2017 Preview](https://www.visualstudio.com/vs/preview) (15.4 Preview 6)
+- Get a free copy of [Visual Studio 2017](https://www.visualstudio.com/) (version 15.4)
 - Get the latest [Windows 10 Insider Preview](https://www.microsoft.com/software-download/windowsinsiderpreviewiso) (16299)
 - Get the [Windows 10 Insider SDK](https://www.microsoft.com/software-download/windowsinsiderpreviewSDK) (16299)
 - Download and install the [.NET Core SDK](https://www.microsoft.com/net/core/#windowscmd).
