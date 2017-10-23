@@ -15,7 +15,7 @@ and connected animations.
 
 This sample uses the following client libraries and services:
 - UWP Community Toolkit for Facebook authentication and Facebook Graph API operations
-- Microsoft Authentication Library for authenticating with Microsoft Graph
+- Microsoft Graph service
 - Yelp service for restaurant recommendations
 - Bing maps service for rendering maps and location
 
@@ -28,10 +28,18 @@ in the license file.
 This sample requires Visual Studio 2017 (version 15.4), as well as the latest Windows Insider OS and SDK releases. 
 Information about becoming a Windows Insider is available at [https://insider.windows.com](https://insider.windows.com). 
 Once registered, you can use the following links to retrieve the appropriate installers.
-- Get a free copy of [Visual Studio 2017](https://www.visualstudio.com/) (version 15.4)
-- Get the latest [Windows 10 Insider Preview](https://www.microsoft.com/software-download/windowsinsiderpreviewiso) (16299)
-- Get the [Windows 10 Insider SDK](https://www.microsoft.com/software-download/windowsinsiderpreviewSDK) (16299)
+- Get a copy of [Visual Studio 2017](https://www.visualstudio.com/) (version 15.4)
+- Get the [Windows 10 Fall Creators Update](https://support.microsoft.com/help/4028685/windows-10-get-the-fall-creators-update) (16299)
+- Get the latest [Windows 10 SDK](https://developer.microsoft.com/windows/downloads/windows-10-sdk) (16299)
 - Download and install the [.NET Core SDK](https://www.microsoft.com/net/core/#windowscmd).
+
+> Important: After installing the .NET Core SDK you need to ensure the following components are installed in Visual Studio, or you may receive build errors. You'll need to launch Visual Studio Installer and ensure all of these components are selected:
+
+- Universal Windows Platform development
+- ASP.NET and web development
+- Azure development
+- .NET Core cross-platform development
+
 
 ## Running the sample
 Lunch Scheduler utilizes a number of services that require registration and developer keys to function. 
@@ -59,7 +67,7 @@ This section provides guidance on how to:
 
 > Note: You don't need to configure all of the services for the app to work in standard mode. 
 For example, you can configure either Facebook *or* Microsoft Graph to supply your coworkers or friends list. 
-However, for the restaurant selections, you'll need to use the Yelp service to complete the **Create a lunch** workflow.
+However, for the restaurant selections and mapping functionality, you'll need to use the Yelp service and Bing Maps to complete the **Create a lunch** workflow.
 
 #### Get started
 
@@ -150,7 +158,7 @@ This will route traffic through to the services being implemented in this sectio
     Api = new LunchRestRepository(Models.Constants.ApiUrl);
     ```
 
-8. Finally, open **Constants.cs** again and supply a unique value for the JwtSecretKey. This is required for secure 
+8. Finally, open **Constants.cs** again and supply a unique value for the JwtSecretKey. This can be any value and it's required for secure 
 communication between the app service and the client app.
 9. Run the app.
 
