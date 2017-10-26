@@ -178,7 +178,7 @@ csx/
 ecf/
 rcf/
 
-# Windows Store app package directories and files
+# Microsoft Store app package directories and files
 AppPackages/
 BundleArtifacts/
 Package.StoreAssociation.xml

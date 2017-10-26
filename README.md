@@ -81,11 +81,11 @@ into the Facebook Graph API for user and friends profile information. You'll nee
 site and retrieve the app ID for the sample.
 
 1. To register your app with Facebook see and complete the steps outlined at [Facebook Service](https://developer.microsoft.com/en-us/windows/uwp-community-toolkit/services/facebook). 
-> Note: You can also retrieve the app Windows Store ID detailed in the above topic by right clicking the project in Visual Studio 
+> Note: You can also retrieve the app Microsoft Store ID detailed in the above topic by right clicking the project in Visual Studio 
 and select **Store -> Associate App with the Store.** Then follow the instructions in the wizard. 
 You don't actually need to submit the app to the Store, just associate it.
 
-2. Under **LunchScheduler.Models** open **Constants.cs**. Copy the app ID and the Windows Store app ID values into the 
+2. Under **LunchScheduler.Models** open **Constants.cs**. Copy the app ID and the Microsoft Store app ID values into the 
 Facebook app registration section.
 
 #### Using Microsoft Graph

@@ -91,7 +91,7 @@ namespace LunchScheduler.Models
         public const string JwtAudience = "lunch-scheduler-user";
 
         /// <summary>
-        /// The Facebook Id. Register with https://developers.facebook.com to retrieve an app ID, and a Windows Store ID.
+        /// The Facebook Id. Register with https://developers.facebook.com to retrieve an app ID, and a Microsoft Store ID.
         /// </summary>
         public const string FacebookAppId = "";
 
