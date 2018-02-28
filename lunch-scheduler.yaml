@@ -1,0 +1,12 @@
+### YamlMime:Sample
+sample:
+- name: Lunch scheduler 
+  description: A Universal Windows Platform (UWP) sample that schedules lunches with your friends and coworkers. 
+You can invite friends to a restaurant of interest and the app takes care of the lunch management for all involved parties.
+  generateZip: false
+  author: karler
+  languages:
+  - csharp
+  - xaml
+  technologies:
+  - windows
