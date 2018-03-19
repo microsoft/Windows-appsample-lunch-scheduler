@@ -1,7 +1,9 @@
 <!---
-	category: Fluent
+    category: Fluent
 -->
+
 # Lunch Scheduler app
+
 Lunch Scheduler is a Universal Windows Platform (UWP) sample that schedules lunches with your friends and coworkers. 
 You can invite friends to a restaurant of interest and the app takes care of the lunch management for all involved parties. 
 This app highlights the following:
@@ -25,23 +27,21 @@ These images are copyrighted by Getty images, and usage is limited to the person
 in the license file.
 
 ## Prerequisites
-This sample requires Visual Studio 2017 (version 15.4), as well as the latest Windows Insider OS and SDK releases. 
-Information about becoming a Windows Insider is available at [https://insider.windows.com](https://insider.windows.com). 
-Once registered, you can use the following links to retrieve the appropriate installers.
-- Get a copy of [Visual Studio 2017](https://www.visualstudio.com/) (version 15.4)
-- Get the [Windows 10 Fall Creators Update](https://support.microsoft.com/help/4028685/windows-10-get-the-fall-creators-update) (16299)
-- Get the latest [Windows 10 SDK](https://developer.microsoft.com/windows/downloads/windows-10-sdk) (16299)
-- Download and install the [.NET Core SDK](https://www.microsoft.com/net/core/#windowscmd).
 
-> Important: After installing the .NET Core SDK you need to ensure the following components are installed in Visual Studio, or you may receive build errors. You'll need to launch Visual Studio Installer and ensure all of these components are selected:
+This sample requires [Visual Studio 2017 and the latest version of the Windows 10 SDK](http://go.microsoft.com/fwlink/?LinkID=280676). You can use the free Visual Studio Community Edition to build and run Windows Universal Platform (UWP) apps. 
+
+To get the latest updates to Windows and the development tools, and to help shape their development, join 
+the [Windows Insider Program](https://insider.windows.com).
+
+You must also install the latest [.NET Core SDK](https://www.microsoft.com/net/core) and then ensure the following components are installed in Visual Studio, or you may receive build errors. To do this, launch Visual Studio Installer and ensure that all of these components are selected:
 
 - Universal Windows Platform development
 - ASP.NET and web development
 - Azure development
 - .NET Core cross-platform development
 
-
 ## Running the sample
+
 Lunch Scheduler utilizes a number of services that require registration and developer keys to function. 
 To help you get going quickly, Lunch Scheduler can be run in two different modes. 
 
@@ -51,11 +51,13 @@ and functionality of the app without any setup.
 production-grade experience. 
 
 ### Demo mode
+
 After downloading or cloning the GitHub repo, simply open the solution in Visual Studio 2017 Preview, select the appropriate 
 architecture, and press F5 to build and run. Choose **Demo** at the login prompt to enter demo mode. 
 Note: while other options are shown, they will not work until configured. 
 
 ### Standard mode
+
 You can use the Lunch Scheduler app with real services and data. When you enter standard mode, 
 by signing in with a real account, you have the ability to authenticate with Facebook or Microsoft Graph to retrieve 
 user profile information for the signed-in user, and coworkers and friends, to use in the app. Also, you can leverage the 
@@ -89,6 +91,7 @@ You don't actually need to submit the app to the Store, just associate it.
 Facebook app registration section.
 
 #### Using Microsoft Graph
+
 You can also authenticate with the Microsoft Graph service and use the Microsoft Graph API to retrieve user and 
 coworkers from an Office 365 tenant. You'll need an Office 365 business account, or developer account, to create contacts 
 to use in Lunch Scheduler. If you don't have one currently you can sign up for a demo subscription here 
@@ -118,9 +121,10 @@ If these fields are not populated for the user, then the info will not be return
 registration section.
 
 #### Using Bing maps for mapping and location-based services
- Lunch Scheduler needs a Bing Maps key to run with full functionality. For security reasons, we can't provide a key as 
- part of the sample - you'll need to get your own at https://www.bingmapsportal.com.  Under **LunchScheduler.Models** 
- open **Constants.cs**. Copy the key/token into the Bing Maps app registration section.
+
+Lunch Scheduler needs a Bing Maps key to run with full functionality. For security reasons, we can't provide a key as 
+part of the sample - you'll need to get your own at https://www.bingmapsportal.com.  Under **LunchScheduler.Models** 
+open **Constants.cs**. Copy the key/token into the Bing Maps app registration section.
 
 #### Using Yelp for restaurant suggestions
 
@@ -176,11 +180,13 @@ two different views. For more informations about them, you can read the docs [he
 * [LoginPage.xaml.cs](LunchScheduler/Views/LoginPage.xaml.cs#L34)
 
 ### Reveal highlight
+
 Reveal is a lighting effect that helps bring depth and focus to your apps's interactive elements. 
 You can read more about the effect [here](https://docs.microsoft.com/windows/uwp/style/reveal) or see it in use by 
 running the app and looking at the top navigational control.
 
 ### Acrylic
+
 Acrylic material is a type of Brush that creates a partially transparent texture, which can be applied to app surfaces 
 to add depth and help establish a viual hierarchy. You can learn more about acrylic 
 usage [here](https://docs.microsoft.com/windows/uwp/style/acrylic) or review the following code files:
@@ -188,12 +194,14 @@ usage [here](https://docs.microsoft.com/windows/uwp/style/acrylic) or review the
 * [CreateLunchPage.xaml](LunchScheduler/Views/CreateLunchPage.xaml#L34)
 
 ### Authentication
+
 Authentication services allow you to verify users, as well as access profile and other information about them. 
 This sample demonstrates using the Microsoft and Facebook Graph services for this purpose. For more information, 
 review the following code files:
 * [AuthenticationViewModel.cs](LunchScheduler/ViewModels/AuthenticationViewModel.cs#L34)
 
 ### Location and restaurant data
+
 Bing Maps and the Yelp service provide data for your lunches. For more detail about using these services see the following code files:
 
 * [LocationHelper.cs](LunchScheduler/Common/LocationHelper.cs#L34)
