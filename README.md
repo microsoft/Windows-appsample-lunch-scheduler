@@ -2,6 +2,17 @@
     category: Fluent
 -->
 
+---
+topic: sample
+languages:
+- csharp
+products:
+- windows
+- uwp
+statusNotificationTargets:
+- codefirst
+---
+
 # Lunch Scheduler app
 
 Lunch Scheduler is a Universal Windows Platform (UWP) sample that schedules lunches with your friends and coworkers. 
