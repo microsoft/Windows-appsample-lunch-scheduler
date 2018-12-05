@@ -1,7 +1,3 @@
-<!---
-    category: Fluent
--->
-
 ---
 topic: sample
 languages:
