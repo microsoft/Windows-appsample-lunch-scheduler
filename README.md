@@ -9,6 +9,10 @@ statusNotificationTargets:
 - codefirst
 ---
 
+<!---
+    category: Fluent
+-->
+
 # Lunch Scheduler app
 
 Lunch Scheduler is a Universal Windows Platform (UWP) sample that schedules lunches with your friends and coworkers. 
