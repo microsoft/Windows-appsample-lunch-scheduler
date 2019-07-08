@@ -221,3 +221,6 @@ Bing Maps and the Yelp service provide data for your lunches. For more detail ab
 
 * [LocationHelper.cs](LunchScheduler/Common/LocationHelper.cs#L34)
 * [RestaurantsController.cs](LunchScheduler.Api/Controllers/RestaurantsController.cs#L34)
+
+
+
