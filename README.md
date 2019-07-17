@@ -7,7 +7,6 @@ products:
 - windows-uwp
 statusNotificationTargets:
 - codefirst@microsoft.com
-description: "Lunch Scheduler is a Universal Windows Platform (UWP) sample that schedules lunches with your friends and coworkers."
 ---
 
 <!---
@@ -16,10 +15,11 @@ description: "Lunch Scheduler is a Universal Windows Platform (UWP) sample that 
 
 # Lunch Scheduler app
 
+Lunch Scheduler is a Universal Windows Platform (UWP) sample that schedules lunches with your friends and coworkers. 
+You can invite friends to a restaurant of interest and the app takes care of the lunch management for all involved parties.
+
 > Note - This sample is targeted and tested for Windows 10, version 1903 (10.0; Build 18362), and Visual Studio 2019. If you prefer, you can use project properties to retarget the project(s) to Windows 10, version 1809 (10.0; Build 17763), and/or open the sample with Visual Studio 2017.
 
-Lunch Scheduler is a Universal Windows Platform (UWP) sample that schedules lunches with your friends and coworkers. 
-You can invite friends to a restaurant of interest and the app takes care of the lunch management for all involved parties. 
 This app highlights the following:
 
 - Integration with services like Facebook and Microsoft Graph for authentication, user operations, and friends discovery.
