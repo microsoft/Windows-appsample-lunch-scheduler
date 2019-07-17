@@ -7,6 +7,7 @@ products:
 - windows-uwp
 statusNotificationTargets:
 - codefirst@microsoft.com
+description: "Lunch Scheduler is a Universal Windows Platform (UWP) sample that schedules lunches with your friends and coworkers."
 ---
 
 <!---
