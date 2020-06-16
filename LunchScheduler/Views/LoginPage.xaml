@@ -35,6 +35,7 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:ctCtrls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:toolkitConverters="using:Microsoft.Toolkit.Uwp.UI.Converters"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -57,11 +58,11 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         
-        <PersonPicture x:Name="LoginPicture"
+        <muxc:PersonPicture x:Name="LoginPicture"
                        Grid.Row="1" />
 
         <StackPanel Grid.Row="2">
-            <ProgressRing x:Name="LoginProgress"
+            <muxc:ProgressRing x:Name="LoginProgress"
                           IsActive="{x:Bind ViewModel.IsLoggingIn, Mode=OneWay}"
                           Foreground="#57AF57"
                           Margin="0,0,0,24"

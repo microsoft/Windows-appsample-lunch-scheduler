@@ -37,6 +37,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:models="using:LunchScheduler.Models"
+      xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
       mc:Ignorable="d">
     <Page.Resources>
         <Style x:Key="ListViewItemNormal"
@@ -163,7 +164,7 @@
                 </FlyoutBase.AttachedFlyout>
             </HyperlinkButton>
 
-            <PersonPicture x:Name="UserPicture"
+            <muxc:PersonPicture x:Name="UserPicture"
                            Width="24"
                            Height="24"
                            ProfilePicture="{x:Bind ViewModel.User.PhotoUrl, Mode=OneWay}"
@@ -176,7 +177,7 @@
                                         Click="MenuFlyoutItem_Click" />
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
-            </PersonPicture>
+            </muxc:PersonPicture>
 
         </Grid>
 

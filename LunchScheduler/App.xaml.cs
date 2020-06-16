@@ -38,6 +38,7 @@ using LunchScheduler.Repository;
 using LunchScheduler.ViewModels;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.ViewManagement;
@@ -54,7 +55,7 @@ namespace LunchScheduler
     {
         public static ILunchRepository Api { get; private set; }
         public static MainViewModel ViewModel { get; } = new MainViewModel();
-        public static AuthenticationViewModel AuthenticationViewModel { get; } = new AuthenticationViewModel(); 
+        public static AuthenticationViewModel AuthenticationViewModel { get; } = new AuthenticationViewModel();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

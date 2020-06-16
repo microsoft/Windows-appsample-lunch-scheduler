@@ -55,6 +55,10 @@
     <!-- Round style for Windows.UI.Xaml.Controls.AppBarButton -->
     <Style x:Key="RoundButtonStyle"
            TargetType="AppBarButton">
+        <Setter Property="Width"
+                Value="100"/>
+        <Setter Property="Height"
+                Value="100"/>
         <Setter Property="Foreground"
                 Value="{ThemeResource AppBarItemForegroundThemeBrush}" />
         <Setter Property="Background"
@@ -183,13 +187,13 @@
                                   HorizontalAlignment="Center">
                                 <Ellipse x:Name="BackgroundEllipse"
                                          UseLayoutRounding="False"
-                                         Width="100"
-                                         Height="100"
+                                         Width="{TemplateBinding Width}"
+                                         Height="{TemplateBinding Height}"
                                          Fill="{ThemeResource AppBarItemBackgroundThemeBrush}" />
                                 <Ellipse x:Name="OutlineEllipse"
                                          UseLayoutRounding="False"
-                                         Width="100"
-                                         Height="100"
+                                         Width="{TemplateBinding Width}"
+                                         Height="{TemplateBinding Height}"
                                          Stroke="{ThemeResource AppBarItemBorderThemeBrush}"
                                          StrokeThickness="2" />
                                 <ContentPresenter x:Name="Content"

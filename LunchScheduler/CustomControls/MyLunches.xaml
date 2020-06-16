@@ -37,6 +37,7 @@
              xmlns:models="using:LunchScheduler.Models"
              xmlns:ctCtrls="using:Microsoft.Toolkit.Uwp.UI.Controls"
              xmlns:root="using:LunchScheduler"
+             xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
@@ -69,6 +70,39 @@
             <Style x:Key="CreateRoundButtonStyle"
                    TargetType="AppBarButton"
                    BasedOn="{StaticResource RoundButtonStyle}" />
+
+            <DataTemplate x:Key="LunchItemTemplateFull" x:DataType="models:Lunch">
+                <StackPanel Width="140"
+                            Height="144"
+                            Padding="20,12"
+                            Margin="0,0,0,0">
+                    <muxc:PersonPicture DisplayName="{x:Bind Host.Name}"
+                                        ProfilePicture="{x:Bind Host.PhotoUrl, Mode=OneWay}"
+                                        Width="100" />
+                    <TextBlock Text="{x:Bind Date, Converter={StaticResource DateStringFormatConverter}, ConverterParameter='g'}"
+                               Style="{StaticResource BrandCaptionTextStyle}"
+                               Grid.Row="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom" />
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="LunchItemTemplateSmall" x:DataType="models:Lunch">
+                <StackPanel Width="74"
+                            Height="144"
+                            Padding="10,12"
+                            Margin="0,8,0,0">
+                    <muxc:PersonPicture DisplayName="{x:Bind Host.Name}"
+                                        ProfilePicture="{x:Bind Host.PhotoUrl, Mode=OneWay}"
+                                        Width="54" />
+                    <TextBlock Text="{x:Bind Date, Converter={StaticResource DateStringFormatConverter}, ConverterParameter='g'}"
+                                       Style="{StaticResource BrandCaptionTextStyle}"
+                                       Grid.Row="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Bottom" />
+                </StackPanel>
+            </DataTemplate>
+
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -82,20 +116,23 @@
                                  Margin="6,159,6,0">
             <Border BorderBrush="Blue"
                     BorderThickness="0,0,0,0"
-                    Height="1" />
+                    Height="1"/>
         </ctCtrls:DropShadowPanel>
 
         <Grid x:Name="rootPanel"
-              Style="{StaticResource MyLunchesPanelStyle}">
+              Style="{StaticResource MyLunchesPanelStyle}"
+              SizeChanged="rootPanel_SizeChanged">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto"
                                   MaxWidth="200" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!-- clock icon -->
             <!--<FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE121;"  Margin="16,0,32,0" Foreground="{ThemeResource BrandPrimaryColorBrush}"/>-->
-            <FontIcon FontFamily="Segoe MDL2 Assets"
+            <FontIcon x:Name="LunchIcon" 
+                      FontFamily="Segoe MDL2 Assets"
                       Glyph="&#xE783;"
                       Margin="16,0,32,0"
                       Foreground="{ThemeResource BrandPrimaryColorBrush}" />
@@ -109,47 +146,56 @@
                        FontSize="20"
                        Margin="0" />
 
-            <GridView x:Name="LunchesList"
+            <AppBarButton x:Name="CreateLunchButton"
+                          Style="{StaticResource CreateRoundButtonStyle}"
+                          Click="CreateLunch_Click"
+                          Grid.Column="2"
+                          VerticalAlignment="Center"
+                          Label="Create Lunch"
+                          Icon="Add"
+                          Width="100"
+                          Foreground="{ThemeResource BrandPrimaryColorBrush}"
+                          Margin="40,-20,0,0" />
+
+            <GridView x:Name="LunchesList" Margin="24,8,0,0"
                       ItemsSource="{x:Bind ViewModel.User.Lunches, Mode=OneWay}"
                       SelectionMode="None"
                       IsItemClickEnabled="True"
+                      ItemTemplate="{StaticResource LunchItemTemplateFull}"
                       ItemClick="LunchesList_ItemClick"
                       Loaded="{x:Bind root:App.ViewModel.UpdateNextLunchText}"
-                      Grid.Column="2">
+                      Grid.Column="3"
+                      ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.VerticalScrollMode="Disabled">
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid MaximumRowsOrColumns="1"
                                        VerticalAlignment="Center" />
                     </ItemsPanelTemplate>
                 </GridView.ItemsPanel>
-                <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Lunch">
-                        <StackPanel Width="140"
-                                    Height="144"
-                                    Padding="20,12"
-                                    Margin="0,8,0,0">
-                            <PersonPicture DisplayName="{x:Bind Host.Name}"
-                                           ProfilePicture="{x:Bind Host.PhotoUrl, Mode=OneWay}"
-                                           Width="100" />
-                            <TextBlock Text="{x:Bind Date, Converter={StaticResource DateStringFormatConverter}, ConverterParameter='g'}"
-                                       Style="{StaticResource BrandCaptionTextStyle}"
-                                       Grid.Row="1"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Bottom" />
-                        </StackPanel>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
             </GridView>
 
-            <AppBarButton Style="{StaticResource CreateRoundButtonStyle}"
-                          Click="CreateLunch_Click"
-                          Grid.Column="3"
-                          VerticalAlignment="Center"
-                          Label="Create Lunch"
-                          Icon="Add"
-                          Width="100"
-                          Foreground="{ThemeResource BrandPrimaryColorBrush}"
-                          Margin="24,0,0,0" />
+
         </Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="SizeStates">
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Small">
+                    <VisualState.Setters>
+                        <Setter Target="LunchIcon.Margin" 
+                                Value="16,0"/>
+                        <Setter Target="NextLunchText.FontSize" Value="14"/>
+                        <Setter Target="LunchesList.ItemTemplate" 
+                                Value="{StaticResource LunchItemTemplateSmall}"/>
+                        <Setter Target="LunchesList.Margin" 
+                                Value="0,8,0,0"/>
+                        <Setter Target="CreateLunchButton.IsCompact" 
+                                Value="True"/>
+                        <Setter Target="CreateLunchButton.Margin" 
+                                Value="0,16,0,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </UserControl>

@@ -30,14 +30,15 @@ and connected animations.
 ![LunchSchedulerBanner](Images/LunchSchedulerBanner.PNG)
 
 This sample uses the following client libraries and services:
+- [Windows UI Library (WinUI) 2.4](https://docs.microsoft.com/windows/apps/winui/winui2/)
 - UWP Community Toolkit for Facebook authentication and Facebook Graph API operations
 - Microsoft Graph service
 - Yelp service for restaurant recommendations
 - Bing maps service for rendering maps and location
 
-> Important: This is an OSS project under the MIT license, however, the images are included for demonstration purposes only 
-(persons and restaurants) and cannot be distributed. They may only be used within the confines of this sample. 
-These images are copyrighted by Getty images, and usage is limited to the personal use and testing of this sample as outlined 
+> Important: This is an OSS project under the MIT license, however, the images are included for demonstration purposes only
+(persons and restaurants) and cannot be distributed. They may only be used within the confines of this sample.
+These images are copyrighted by Getty images, and usage is limited to the personal use and testing of this sample as outlined
 in the license file.
 
 ## Prerequisites
@@ -55,6 +56,8 @@ You must also install the latest [.NET Core SDK](https://www.microsoft.com/net/c
 - ASP.NET and web development
 - Azure development
 - .NET Core cross-platform development
+
+> Important: This sample uses the EntityFrameworkCore 2.0 NuGet packages. The current version of the sample will break if these packages are updated.
 
 ## Running the sample
 

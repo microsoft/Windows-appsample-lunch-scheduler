@@ -37,6 +37,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:models="using:LunchScheduler.Models"
+      xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
       mc:Ignorable="d"
       NavigationCacheMode="Enabled">
     <Page.Resources>
@@ -53,7 +54,7 @@
                         Padding="20,12"
                         Margin="0,8,0,0"
                         ContextFlyout="{StaticResource InviteMenuFlyout}">
-                <PersonPicture DisplayName="{x:Bind Name, Mode=OneWay}"
+                <muxc:PersonPicture DisplayName="{x:Bind Name, Mode=OneWay}"
                                Width="100"
                                ProfilePicture="{x:Bind PhotoUrl, Mode=OneWay}"
                                FlyoutBase.AttachedFlyout="{StaticResource InviteMenuFlyout}"
@@ -67,6 +68,13 @@
                            TextWrapping="NoWrap" />
             </StackPanel>
         </DataTemplate>
+
+        <Style x:Key="GridView_DefaultItemContainerStyle"
+               TargetType="GridViewItem">
+            <Setter Property="Margin" x:Name="GridItemMarginSetter"
+                    Value="0" />
+        </Style>
+
     </Page.Resources>
 
     <Grid Margin="24,24,0,0">
@@ -83,7 +91,8 @@
                           Style="{StaticResource PersonPictureGridStyle}"
                           ItemsSource="{x:Bind ViewModel.User.Friends, Mode=OneWay}"
                           ItemTemplate="{StaticResource UserDataTemplate}"
-                          SelectionChanged="FriendsList_SelectionChanged">
+                          SelectionChanged="FriendsList_SelectionChanged"
+                          ItemContainerStyle="{StaticResource GridView_DefaultItemContainerStyle}">
                     <GridView.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Margin="0,0,0,8"
@@ -107,7 +116,7 @@
                                 Height="144"
                                 Padding="20,12"
                                 Margin="0,8,0,0">
-                        <PersonPicture DisplayName="Gaming friends"
+                        <muxc:PersonPicture DisplayName="Gaming friends"
                                        BadgeGlyph="&#xE7FC;"
                                        Width="100"
                                        ProfilePicture="{x:Bind ViewModel.User.PhotoUrl, Mode=OneWay}" />
@@ -123,7 +132,7 @@
                                 Height="144"
                                 Padding="20,12"
                                 Margin="0,8,0,0">
-                        <PersonPicture DisplayName="Carpool"
+                        <muxc:PersonPicture DisplayName="Carpool"
                                        BadgeGlyph="&#xE811;"
                                        Width="100"
                                        ProfilePicture="{x:Bind ViewModel.User.PhotoUrl, Mode=OneWay}" />
@@ -139,7 +148,7 @@
                                 Height="144"
                                 Padding="20,12"
                                 Margin="0,8,0,0">
-                        <PersonPicture DisplayName="Garden club"
+                        <muxc:PersonPicture DisplayName="Garden club"
                                        BadgeGlyph="&#xEC0A;"
                                        Width="100"
                                        ProfilePicture="{x:Bind ViewModel.User.PhotoUrl, Mode=OneWay}" />

@@ -49,6 +49,7 @@ namespace LunchScheduler.Views
         public MainViewModel ViewModel => App.ViewModel;
 
         private int progressIndicatorOffset = 252;
+        //private int progressIndicatorOffset = 0;
 
         public CreateLunchPage()
         {

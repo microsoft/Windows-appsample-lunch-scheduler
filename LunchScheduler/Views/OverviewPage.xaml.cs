@@ -61,5 +61,38 @@ namespace LunchScheduler.Views
         {
             NavigationService.Navigate(typeof(PlacesPage));
         }
+
+        //private void TwoPaneView_ModeChanged(TwoPaneView sender, object args)
+        //{
+        //    // Remove details content from it's parent panel.
+        //    ((Panel)RestaurantsGrid.Parent).Children.Remove(RestaurantsGrid);
+        //    // Set Normal visual state.
+        //    //Windows.UI.Xaml.VisualStateManager.GoToState(this, "Normal", true);
+
+        //    // Single pane
+        //    if (sender.Mode == TwoPaneViewMode.SinglePane)
+        //    {
+        //        // Add the details content to Pane1.
+        //        Pane1Root.Children.Add(RestaurantsGrid);
+        //    }
+        //    // Dual pane.
+        //    else
+        //    {
+        //        // Put details content in Pane2.
+        //        Pane2Root.Children.Add(RestaurantsGrid);
+
+        //        // If also in Wide mode, set Wide visual state
+        //        // to constrain the width of the image to 2*.
+        //        //if (sender.Mode == Microsoft.UI.Xaml.Controls.TwoPaneViewMode.Wide)
+        //        //{
+        //        //    Windows.UI.Xaml.VisualStateManager.GoToState(this, "Wide", true);
+        //        //}
+        //    }
+        //}
+
+        private void TwoPaneView_ModeChanged(Microsoft.UI.Xaml.Controls.TwoPaneView sender, object args)
+        {
+            var m = sender.Mode;
+        }
     }
 }

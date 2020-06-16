@@ -48,9 +48,34 @@ namespace LunchScheduler.CustomControls
 
         public string GreetingString = String.Empty;
 
+        double RequiredGridWidthNormal = 0.0;
+        bool IsNormalState = true;
+        double AvailableGridSpace = 0.0;
+        double GridAdjustmentSize = 0.0;
+
         public MyLunches()
         {
             this.InitializeComponent();
+
+            ViewModel.User.Lunches.CollectionChanged += Lunches_CollectionChanged;
+
+            Loaded += MyLunches_Loaded;
+        }
+
+        private void MyLunches_Loaded(object sender, RoutedEventArgs e)
+        {
+            // This should only be set once, while the items are in their Normal state.
+            if (GridAdjustmentSize == 0.0)
+            {
+                GridAdjustmentSize = LunchIcon.ActualWidth + LunchIcon.Margin.Left + LunchIcon.Margin.Right +
+                                                        NextLunchText.ActualWidth + NextLunchText.Margin.Left + NextLunchText.Margin.Right +
+                                                        CreateLunchButton.ActualWidth + CreateLunchButton.Margin.Left + CreateLunchButton.Margin.Right +
+                                                        LunchesList.Margin.Left + LunchesList.Margin.Right;
+            }
+
+            AvailableGridSpace = rootPanel.ActualWidth - GridAdjustmentSize;
+            RequiredGridWidthNormal = 140 * LunchesList.Items.Count;
+            UpdateItemSize();
         }
 
         private void CreateLunch_Click(object sender, RoutedEventArgs e)
@@ -102,6 +127,32 @@ namespace LunchScheduler.CustomControls
                     ViewModel.LeaveLunch(invitation);
                 }
             }
+        }
+
+        private void Lunches_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            RequiredGridWidthNormal = 140 * LunchesList.Items.Count;
+            UpdateItemSize();
+        }
+
+        private void UpdateItemSize()
+        {
+            if (IsNormalState == true && AvailableGridSpace < RequiredGridWidthNormal)
+            {
+                VisualStateManager.GoToState(this, "Small", true);
+                IsNormalState = false;
+            }
+            else if (IsNormalState == false && AvailableGridSpace > RequiredGridWidthNormal)
+            {
+                VisualStateManager.GoToState(this, "Normal", true);
+                IsNormalState = true;
+            }
+        }
+
+        private void rootPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            AvailableGridSpace = e.NewSize.Width - GridAdjustmentSize;
+            UpdateItemSize();
         }
     }
 }

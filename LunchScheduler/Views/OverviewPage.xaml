@@ -37,6 +37,7 @@
       xmlns:models="using:LunchScheduler.Models"
       xmlns:devTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
       xmlns:ctrls="using:LunchScheduler.CustomControls"
+      xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
@@ -55,7 +56,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <devTools:AlignmentGrid Opacity="0"
+        <devTools:AlignmentGrid Opacity="0" Grid.RowSpan="2"
                                 LineBrush="Black"
                                 HorizontalStep="4"
                                 VerticalStep="4" />
@@ -66,7 +67,7 @@
         <ScrollViewer Grid.Row="1">
             <RelativePanel>
                 <Grid x:Name="LunchinFriends"
-                      RelativePanel.AlignLeftWithPanel="True">
+                      RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
@@ -88,7 +89,7 @@
                                             Height="144"
                                             Padding="20,12"
                                             Margin="0,8,0,0">
-                                    <PersonPicture DisplayName="{x:Bind Name, Mode=OneWay}"
+                                    <muxc:PersonPicture DisplayName="{x:Bind Name, Mode=OneWay}"
                                                    Width="100"
                                                    ProfilePicture="{x:Bind PhotoUrl, Mode=OneWay}" />
                                     <TextBlock Text="{x:Bind Name}"
@@ -120,7 +121,7 @@
                 </Grid>
 
                 <Grid RelativePanel.Below="LunchinFriends"
-                      RelativePanel.AlignLeftWithPanel="True">
+                      RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
@@ -157,7 +158,7 @@
                                            Width="140"
                                            Height="92"
                                            Stretch="Fill" />
-                                    <RatingControl MaxRating="5"
+                                    <muxc:RatingControl MaxRating="5"
                                                    Value="{x:Bind Rating}"
                                                    IsReadOnly="True"
                                                    VerticalAlignment="Bottom" />
