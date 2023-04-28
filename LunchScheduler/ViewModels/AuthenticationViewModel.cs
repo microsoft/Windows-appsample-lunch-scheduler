@@ -309,7 +309,18 @@ namespace LunchScheduler.ViewModels
             await Task.Run(async () =>
             {
                 OnLoginStarted();
-                if (await FacebookService.Instance.LoginAsync())
+
+                bool result = false;
+
+                try
+                {
+                    result = await FacebookService.Instance.LoginAsync();
+                }
+                catch (Exception ex)
+                {
+                }
+
+                if (result)
                 {
                     string token = FacebookService.Instance.Provider.AccessTokenData.AccessToken;
                     await GetFacebookUserAsync(token);
